@@ -102,8 +102,8 @@ def run_over_slow_programs(slow_programs_file: str, max_attempts: int, outfile: 
             if i % 20 == 0:
                 pd.DataFrame(results).to_json(outfile + f".{i}.jsonl", orient="records", lines=True)
         except Exception as e:
-            # raise e
-            pass
+            raise e
+            # pass
     pd.DataFrame(results).to_json(outfile, orient="records", lines=True)
     return run_logs
 

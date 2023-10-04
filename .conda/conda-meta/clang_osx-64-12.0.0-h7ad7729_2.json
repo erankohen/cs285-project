@@ -1,0 +1,65 @@
+{
+  "build": "h7ad7729_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [
+    "cctools_osx-64",
+    "clang 12.0.0.*",
+    "compiler-rt 12.0.0.*",
+    "ld64_osx-64",
+    "llvm-tools 12.0.0.*"
+  ],
+  "extracted_package_dir": "/opt/anaconda3/pkgs/clang_osx-64-12.0.0-h7ad7729_2",
+  "features": "",
+  "files": [
+    "bin/x86_64-apple-darwin13.4.0-clang",
+    "etc/conda/activate.d/activate_clang_osx-64.sh",
+    "etc/conda/deactivate.d/deactivate_clang_osx-64.sh"
+  ],
+  "fn": "clang_osx-64-12.0.0-h7ad7729_2.conda",
+  "legacy_bz2_md5": "f4c411590d96f84788a0d84df4104a88",
+  "legacy_bz2_size": 19569,
+  "license": "BSD-3-Clause",
+  "license_family": "BSD",
+  "link": {
+    "source": "/opt/anaconda3/pkgs/clang_osx-64-12.0.0-h7ad7729_2",
+    "type": 1
+  },
+  "md5": "95964008c6b453fa08b5962f6b09befe",
+  "name": "clang_osx-64",
+  "package_tarball_full_path": "/opt/anaconda3/pkgs/clang_osx-64-12.0.0-h7ad7729_2.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/x86_64-apple-darwin13.4.0-clang",
+        "path_type": "softlink",
+        "sha256": "126f3dfa359f15dcf68d81a7c8aff6c064323bb528cbd6542eaf1d8281e39d82",
+        "size_in_bytes": 148388
+      },
+      {
+        "_path": "etc/conda/activate.d/activate_clang_osx-64.sh",
+        "path_type": "hardlink",
+        "sha256": "1861706d20314878312d6f518a3db62909610785a09710a5f2c92e98af9499fd",
+        "sha256_in_prefix": "1861706d20314878312d6f518a3db62909610785a09710a5f2c92e98af9499fd",
+        "size_in_bytes": 9819
+      },
+      {
+        "_path": "etc/conda/deactivate.d/deactivate_clang_osx-64.sh",
+        "path_type": "hardlink",
+        "sha256": "0c35d076b68eaa51eaf41514e0f7a5f12ca676cc7f78a2bcda87e3172f0794a0",
+        "sha256_in_prefix": "0c35d076b68eaa51eaf41514e0f7a5f12ca676cc7f78a2bcda87e3172f0794a0",
+        "size_in_bytes": 7420
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "c9f4bdd14e4f63df7693a55cf9caa0b5b2fd5c50d904f0647113573f6ff2eee6",
+  "size": 22015,
+  "subdir": "osx-64",
+  "timestamp": 1628079351739,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/clang_osx-64-12.0.0-h7ad7729_2.conda",
+  "version": "12.0.0"
+}

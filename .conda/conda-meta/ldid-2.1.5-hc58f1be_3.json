@@ -1,0 +1,44 @@
+{
+  "build": "hc58f1be_3",
+  "build_number": 3,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [],
+  "extracted_package_dir": "/opt/anaconda3/pkgs/ldid-2.1.5-hc58f1be_3",
+  "features": "",
+  "files": [
+    "bin/ldid"
+  ],
+  "fn": "ldid-2.1.5-hc58f1be_3.conda",
+  "legacy_bz2_md5": "cfb26423e598775415179e1698fe3b62",
+  "legacy_bz2_size": 63001,
+  "license": "AGPL-3.0-only",
+  "license_family": "LGPL",
+  "link": {
+    "source": "/opt/anaconda3/pkgs/ldid-2.1.5-hc58f1be_3",
+    "type": 1
+  },
+  "md5": "0b0c968729007025d5b41b60b40c3d8b",
+  "name": "ldid",
+  "package_tarball_full_path": "/opt/anaconda3/pkgs/ldid-2.1.5-hc58f1be_3.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/ldid",
+        "path_type": "hardlink",
+        "sha256": "37e059efee9f79102aa6d69b8e65850d2cea3e0eaf09b69ae0a20ef9ab3a088d",
+        "sha256_in_prefix": "37e059efee9f79102aa6d69b8e65850d2cea3e0eaf09b69ae0a20ef9ab3a088d",
+        "size_in_bytes": 124856
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "869bc330784487d3929a916efed5c434598cbe2bd78cf07dd8f677e681cf8b79",
+  "size": 65739,
+  "subdir": "osx-64",
+  "timestamp": 1687285536268,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/ldid-2.1.5-hc58f1be_3.conda",
+  "version": "2.1.5"
+}

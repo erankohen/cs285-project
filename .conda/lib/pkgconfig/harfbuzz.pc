@@ -1,0 +1,13 @@
+prefix=/Users/erankohen/Desktop/285/285 project/cs285-project/.conda
+exec_prefix=/Users/erankohen/Desktop/285/285 project/cs285-project/.conda
+libdir=/Users/erankohen/Desktop/285/285 project/cs285-project/.conda/lib
+includedir=/Users/erankohen/Desktop/285/285 project/cs285-project/.conda/include
+
+Name: harfbuzz
+Description: HarfBuzz text shaping library
+Version: 2.4.0
+
+Libs: -L${libdir} -lharfbuzz
+Libs.private: -lm    
+Requires.private: glib-2.0 >= 2.19.1 graphite2 >= 1.2.0
+Cflags: -I${includedir}/harfbuzz

@@ -1,0 +1,83 @@
+{
+  "build": "h3efe00b_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-64",
+  "constrains": [],
+  "depends": [],
+  "extracted_package_dir": "/opt/anaconda3/pkgs/make-4.2.1-h3efe00b_1",
+  "features": "",
+  "files": [
+    "bin/make",
+    "include/gnumake.h",
+    "share/info/make.info",
+    "share/info/make.info-1",
+    "share/info/make.info-2",
+    "share/man/man1/make.1"
+  ],
+  "fn": "make-4.2.1-h3efe00b_1.conda",
+  "legacy_bz2_md5": "a8df14101edb945bc4b1442c1426c7b5",
+  "legacy_bz2_size": 240006,
+  "license": "GPLv3",
+  "link": {
+    "source": "/opt/anaconda3/pkgs/make-4.2.1-h3efe00b_1",
+    "type": 1
+  },
+  "md5": "1269cb22eef5a1ec1f7c436749997aa6",
+  "name": "make",
+  "package_tarball_full_path": "/opt/anaconda3/pkgs/make-4.2.1-h3efe00b_1.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/make",
+        "path_type": "hardlink",
+        "sha256": "1709e1bf1d76a556ac59206dfa10a68023ff6d97306e855a84b7f247835fb056",
+        "sha256_in_prefix": "1709e1bf1d76a556ac59206dfa10a68023ff6d97306e855a84b7f247835fb056",
+        "size_in_bytes": 215040
+      },
+      {
+        "_path": "include/gnumake.h",
+        "path_type": "hardlink",
+        "sha256": "da9f000c7bf0354d118bccfb7ed1e864341d3a4d6fd319ecb4fd9949f5111ea5",
+        "sha256_in_prefix": "da9f000c7bf0354d118bccfb7ed1e864341d3a4d6fd319ecb4fd9949f5111ea5",
+        "size_in_bytes": 2912
+      },
+      {
+        "_path": "share/info/make.info",
+        "path_type": "hardlink",
+        "sha256": "bda1645c84b827d72e363f95b6d6a92a1b3a8b1a1af5fc2d9bd66f6267d142f7",
+        "sha256_in_prefix": "bda1645c84b827d72e363f95b6d6a92a1b3a8b1a1af5fc2d9bd66f6267d142f7",
+        "size_in_bytes": 6129
+      },
+      {
+        "_path": "share/info/make.info-1",
+        "path_type": "hardlink",
+        "sha256": "eec2645d79db129b730f215160a7636fc065e4ecff7b00de7d38d30b600620f9",
+        "sha256_in_prefix": "eec2645d79db129b730f215160a7636fc065e4ecff7b00de7d38d30b600620f9",
+        "size_in_bytes": 305787
+      },
+      {
+        "_path": "share/info/make.info-2",
+        "path_type": "hardlink",
+        "sha256": "ec1fc57659b764b48503c5d750239b541a0abb20695ea2a58e85969b26b776cd",
+        "sha256_in_prefix": "ec1fc57659b764b48503c5d750239b541a0abb20695ea2a58e85969b26b776cd",
+        "size_in_bytes": 298364
+      },
+      {
+        "_path": "share/man/man1/make.1",
+        "path_type": "hardlink",
+        "sha256": "7762b3f769ddb911d09f856971150aab18b322d1c76015651bd666d64786c0cf",
+        "sha256_in_prefix": "7762b3f769ddb911d09f856971150aab18b322d1c76015651bd666d64786c0cf",
+        "size_in_bytes": 11000
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "b4e8238786ba8d7ae827f8b02a928ef8406b7e3fc9aeae685cd70e243d7d13b8",
+  "size": 243953,
+  "subdir": "osx-64",
+  "timestamp": 1522868045731,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-64/make-4.2.1-h3efe00b_1.conda",
+  "version": "4.2.1"
+}

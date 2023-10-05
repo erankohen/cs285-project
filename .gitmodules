@@ -1,3 +1,6 @@
 [submodule "prompt-lib"]
 	path = prompt-lib
 	url = https://github.com/reasoning-machines/prompt-lib
+[submodule "pie-perf"]
+	path = pie-perf
+	url = https://github.com/madaan/pie-perf

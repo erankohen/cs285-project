@@ -337,14 +337,17 @@ if __name__ == "__main__":
     import argparse
 
     args = argparse.ArgumentParser()
-    args.add_argument("report_path", type=str, default="report.jsonl", nargs="?")
+    args.add_argument("--report_path", type=str, default="report.jsonl", nargs="?")
     args.add_argument("--lang", type=str, default="python")
     args.add_argument("--required_speedup", type=float, default=0.05)
 
     args = args.parse_args()
 
     reports = dict()
-    for i in range(4):
+
+    reports[0] = summarize(report_path=args.report_path, lang=args.lang, n_samples=32, required_speedup=args.required_speedup, return_values=False)
+
+    for i in range(0):
         possible_report_path = f"{args.report_path}/output.pie.jsonl.{i}.report"
         # check if the file exists
         

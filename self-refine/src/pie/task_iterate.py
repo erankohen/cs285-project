@@ -29,8 +29,9 @@ class PieIterate(Prompt):
         self,
         slow_code: str,
         feedback: str,
+        past_feedback: str
     ) -> str:
-        generation_query = self.make_query(slow_code=slow_code, feedback=feedback)
+        generation_query = self.make_query(slow_code=slow_code, feedback=feedback, past_feedback=past_feedback)
 
         output = openai_api.OpenaiAPIWrapper.call(
             prompt=generation_query,
@@ -48,18 +49,26 @@ class PieIterate(Prompt):
 
 
 
-    def make_query(self, slow_code: str, feedback: str) -> str:
+    def make_query(self, slow_code: str, feedback: str, past_feedback: str) -> str:
         instr = "# Why is this code slow?" if self.feedback_type == "default" else "# How to improve this code?"
         example_template = """{slow_code}
 
 {instr}
 
+{past_feedback}
+
+Current feedback:
 {feedback}
 
 # Improved version:
 
 """     
-        query = example_template.format(slow_code=slow_code, feedback=feedback, instr=instr)
+        if past_feedback:
+            past_feedback = "Past feedback on previous iterations of this code: \n" + past_feedback
+        else:
+            past_feedback = ""
+
+        query = example_template.format(slow_code=slow_code, feedback=feedback, instr=instr, past_feedback=past_feedback)
 
         return f"{self.prompt}{query}"
 

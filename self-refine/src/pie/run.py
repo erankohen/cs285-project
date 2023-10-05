@@ -16,7 +16,7 @@ ENGINE = CHATGPT
 
 
 @retry_parse_fail_prone_cmd
-def iterative_pie(slow_code: str, max_attempts: int, feedback_type: str, temperature: float):
+def iterative_pie(slow_code: str, max_attempts: int, feedback_type: str, temperature: float, concat_feedback: bool = False):
 
     # initialize all the required components
 
@@ -45,18 +45,21 @@ def iterative_pie(slow_code: str, max_attempts: int, feedback_type: str, tempera
 
     log = []
     feedback = None
+    past_feedback = ""
 
     while n_attempts < max_attempts:
 
         if n_attempts == 0:
             fast_code = task_init(slow_code=slow_code)
         else:
-            fast_code = task_iterate(slow_code=slow_code, feedback=feedback)
+            fast_code = task_iterate(slow_code=slow_code, feedback=feedback, past_feedback=past_feedback)
 
         # feedback = task_feedback(slow_code=slow_code)
+        if concat_feedback:
+            past_feedback += ("\n\n" + feedback) if feedback else ""
         feedback = task_feedback(slow_code=fast_code)
 
-        log.append({"fast_code": fast_code, "feedback": feedback, "slow_code": slow_code, "attempt": n_attempts})
+        log.append({"fast_code": fast_code, "feedback": feedback, "past_feedback": past_feedback, "slow_code": slow_code, "attempt": n_attempts})
         show_example(**log[-1])
 
         if "this code is not slow" in feedback.lower():
@@ -73,10 +76,13 @@ def show_example(**kwargs):
     # shows {"fast_code": fast_code, "feedback": feedback, "slow_code": slow_code, "attempt": n_attempts}
     print(f"SLOW CODE:\n{kwargs['slow_code']}\n")
     print(f"\n\nFEEDBACK:\n{kwargs['feedback']}\n")
+    if kwargs['past_feedback']:
+        print(f"\n\nPAST FEEDBACK:\n{kwargs['past_feedback']}\n")
     print(f"\n\nFAST CODE:\n{kwargs['fast_code']}\n")
+    print(f"\n\NUMBER OF ATTEMPTS:\n{kwargs['attempt']}\n")
     print("-" * 100)
     
-def run_over_slow_programs(slow_programs_file: str, max_attempts: int, outfile: str, feedback_type: str, temperature: float, backup_file: str = None):
+def run_over_slow_programs(slow_programs_file: str, max_attempts: int, outfile: str, feedback_type: str, temperature: float, backup_file: str = None, concat_feedback: bool = False):
 
     slow_programs_df = pd.read_json(slow_programs_file, lines=True, orient="records")
     slow_programs_df["run_logs"] = None
@@ -95,7 +101,7 @@ def run_over_slow_programs(slow_programs_file: str, max_attempts: int, outfile: 
 
         row_copy = row.to_dict()
         try:
-            run_logs = iterative_pie(slow_code=row["input"], max_attempts=max_attempts, feedback_type=feedback_type, temperature=temperature)
+            run_logs = iterative_pie(slow_code=row["input"], max_attempts=max_attempts, feedback_type=feedback_type, temperature=temperature, concat_feedback=concat_feedback)
             print(run_logs)
             row_copy["run_logs"] = run_logs
             results.append(row_copy)
@@ -114,7 +120,7 @@ def test():
         "def sum(n):\\n    res = 0\\n    for i in range(n):\\n        res += i\\n    return res"
     )
     logs = run_over_slow_programs(
-        slow_programs=[slow_code], max_attempts=3, outfile="/tmp/test.jsonl"
+        slow_programs_file=[slow_code], max_attempts=3, outfile="/tmp/test.jsonl", feedback_type="none", temperature=0
     )
     for (slow_code, log) in logs.items():
         for attempt in log:
@@ -138,6 +144,7 @@ if __name__ == "__main__":
         args.add_argument("--feedback_type", type=str)
         args.add_argument("--temperature", type=float, default=0.0)
         args.add_argument("--backup_file", type=str)
+        args.add_argument("--concat_feedback", action='store_true')
         
         args = args.parse_args()
         args.outfile = f"{args.outfile}.fb_{args.feedback_type}.temp_{args.temperature}.engine_{ENGINE}.jsonl"
@@ -148,4 +155,4 @@ if __name__ == "__main__":
                 v += 1
             args.outfile = args.outfile + f".v{v}"
             print(f"Output file {args.outfile} already exists. Adding a suffix to it (v{v})")
-        run_over_slow_programs(slow_programs_file=args.slow_programs_file, max_attempts=args.max_attempts, outfile=args.outfile, feedback_type=args.feedback_type, temperature=args.temperature, backup_file=args.backup_file)
+        run_over_slow_programs(slow_programs_file=args.slow_programs_file, max_attempts=args.max_attempts, outfile=args.outfile, feedback_type=args.feedback_type, temperature=args.temperature, backup_file=args.backup_file, concat_feedback=args.concat_feedback)

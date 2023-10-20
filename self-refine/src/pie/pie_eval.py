@@ -118,7 +118,7 @@ def summarize(
     report_df = pd.read_json(report_path, lines=True, orient="records")
     
     
-    report_df = report_df[report_df["reference_acc"] == 1]
+    # report_df = report_df[report_df["reference_acc"] == 1]
 
     gen_time_cols = [c for c in report_df.columns if "generated" in c and "time_mean" in c and c != "generated_answers_time_mean"]
     
@@ -142,7 +142,7 @@ def summarize(
     # set all none values in acc columns to 0
     report_df[gen_acc_cols] = report_df[gen_acc_cols].fillna(0)
 
-    report_df["input_shape"] = report_df["input_stats_all"].apply(lambda x: np.array(x).shape)
+    # report_df["input_shape"] = report_df["input_stats_all"].apply(lambda x: np.array(x).shape)
     
     # for each row, find the best time among those submissions that have acc = 1
     for time_col in gen_time_cols:

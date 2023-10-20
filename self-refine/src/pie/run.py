@@ -79,7 +79,7 @@ def show_example(**kwargs):
     if kwargs['past_feedback']:
         print(f"\n\nPAST FEEDBACK:\n{kwargs['past_feedback']}\n")
     print(f"\n\nFAST CODE:\n{kwargs['fast_code']}\n")
-    print(f"\n\NUMBER OF ATTEMPTS:\n{kwargs['attempt']}\n")
+    print(f"\n\nNUMBER OF ATTEMPTS:\n{kwargs['attempt']}\n")
     print("-" * 100)
     
 def run_over_slow_programs(slow_programs_file: str, max_attempts: int, outfile: str, feedback_type: str, temperature: float, backup_file: str = None, concat_feedback: bool = False):

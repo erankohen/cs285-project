@@ -117,9 +117,7 @@ def summarize(
 ):
     report_df = pd.read_json(report_path, lines=True, orient="records")
     
-    
     # report_df = report_df[report_df["reference_acc"] == 1]
-
     gen_time_cols = [c for c in report_df.columns if "generated" in c and "time_mean" in c and c != "generated_answers_time_mean"]
     
     if len(gen_time_cols) == 0:
@@ -142,8 +140,10 @@ def summarize(
     # set all none values in acc columns to 0
     report_df[gen_acc_cols] = report_df[gen_acc_cols].fillna(0)
 
-    # report_df["input_shape"] = report_df["input_stats_all"].apply(lambda x: np.array(x).shape)
+    # import pdb; pdb.set_trace()
+    report_df["input_shape"] = report_df["input_time_mean"].apply(lambda x: np.array([x]).shape)
     
+    print(gen_time_cols)
     # for each row, find the best time among those submissions that have acc = 1
     for time_col in gen_time_cols:
         acc_col = time_col.replace("time_mean", "acc")
@@ -152,15 +152,12 @@ def summarize(
 
         # also ignore solutions that have a different shape than the input
         all_stats_col = time_col.replace("time_mean", "stats_all")
-        report_df.loc[report_df[all_stats_col].apply(lambda x: np.array(x).shape) != report_df["input_shape"], time_col] = LARGE_NUMBER
-
+        report_df.loc[report_df[time_col].apply(lambda x: np.array([x]).shape) != report_df["input_shape"], time_col] = LARGE_NUMBER
     report_df["best_generated_time_mean"] = report_df[gen_time_cols].min(axis=1)
 
     # find the column name of the best time. This tells us which of the N solutions was the best
     report_df["best_generated_time_mean_col"] = report_df.apply(
-        lambda row: [col for col in gen_time_cols if row[col] == row["best_generated_time_mean"]][
-            0
-        ],
+        lambda row: [col for col in gen_time_cols if row[col] == row["best_generated_time_mean"]][0],
         axis=1,
     )
 
@@ -229,7 +226,8 @@ def summarize(
     # num_recs = len(report_df)
     # test_set_size = len(report_df)
     # report_df = report_df[report_df["p_value"] < 0.05]
-    report_df = report_df[report_df[f"p_value_{required_speedup}pct"] < 0.05]
+    # import pdb; pdb.set_trace()
+    # report_df = report_df[report_df[f"p_value_{required_speedup}pct"] < 0.05]
 
     # print(f" Reference speedup: {report_df[report_df['reference_acc'] == 1]['speedup_vs_ref'].mean():.2f}x")
     
@@ -252,7 +250,7 @@ def summarize(
         mean_speedup = np.mean(all_speedups)
     if return_values:
         return opt_pct, mean_speedup
-
+    # import pdb; pdb.set_trace()
             
     # print(f"{opt_pct} & {report_df['speedup'].mean():.2f} & {report_df['speedup'].max():.2f}")
     return report_df[['problem_id', 'submission_id_v0', 'speedup', f"p_value_{required_speedup}pct"]]
@@ -345,18 +343,21 @@ if __name__ == "__main__":
 
     reports = dict()
 
-    reports[0] = summarize(report_path=args.report_path, lang=args.lang, n_samples=32, required_speedup=args.required_speedup, return_values=False)
-
-    for i in range(0):
-        possible_report_path = f"{args.report_path}/output.pie.jsonl.{i}.report"
+    for i in range(4):
+        possible_report_path = f"{args.report_path}/report{i}.json"
         # check if the file exists
         
         if os.path.exists(possible_report_path):
-            reports[i] = summarize(report_path=possible_report_path, lang=args.lang, n_samples=32, required_speedup=args.required_speedup, return_values=False)
-            reports[i]["run"] = i
+            try:
+                reports[i] = summarize(report_path=possible_report_path, lang=args.lang, n_samples=32, required_speedup=args.required_speedup, return_values=False)
+                reports[i]["run"] = i
+            except: 
+                pass
     
+
     # concat all reports
     report = pd.concat([pd.DataFrame.from_dict(reports[i]) for i in reports])
-    
-    runs = analyze_runs(report)
-    print(runs)
+    print(report)
+
+    # runs = analyze_runs(report)
+    # print(runs)

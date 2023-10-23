@@ -333,6 +333,7 @@ if __name__ == "__main__":
     args.add_argument("--report_path", type=str, default="report.jsonl", nargs="?")
     args.add_argument("--lang", type=str, default="python")
     args.add_argument("--required_speedup", type=float, default=0.05)
+    args.add_argument("--output_path", type=str, default="data/out")
 
     args = args.parse_args()
 
@@ -347,8 +348,10 @@ if __name__ == "__main__":
             reports[i]["run"] = i
 
     # concat all reports
-    report = pd.concat([pd.DataFrame.from_dict(reports[i]) for i in reports if not reports[i].empty])
-    print(report)
-
-    # runs = analyze_runs(report)
-    # print(runs)
+    if all([reports[i].empty for i in reports]):
+        print("No reports found")
+    else:
+        report = pd.concat([pd.DataFrame.from_dict(reports[i]) for i in reports if not reports[i].empty])
+        report.to_csv(f"{args.output_path}/report.csv", index=False)
+        runs = analyze_runs(report)
+        runs.to_csv(f"{args.output_path}/runs.csv", index=False)

@@ -140,10 +140,8 @@ def summarize(
     # set all none values in acc columns to 0
     report_df[gen_acc_cols] = report_df[gen_acc_cols].fillna(0)
 
-    # import pdb; pdb.set_trace()
     report_df["input_shape"] = report_df["input_time_mean"].apply(lambda x: np.array([x]).shape)
     
-    print(gen_time_cols)
     # for each row, find the best time among those submissions that have acc = 1
     for time_col in gen_time_cols:
         acc_col = time_col.replace("time_mean", "acc")
@@ -185,7 +183,6 @@ def summarize(
     report_df["diff_empty"] = report_df["diff"].apply(lambda x: "".join([d.strip() for d in x]) == "")
     report_df = report_df[~report_df["diff_empty"]]
 
-
     report_df = report_df[report_df["input"] != report_df["best_generated_soln"]]
 
     if len(report_df) == 0:
@@ -194,12 +191,12 @@ def summarize(
     # report_df["p_value"] = report_df.apply(lambda row: get_welch_t_test_p(row), axis=1)
 
     # t = mu(input) - mu(best_generated) - X% of mu(input) / std_error (t test for a speedup of X%; Null hyp = speedup <= X%)
-    report_df[f"p_value_{required_speedup}pct"] = report_df.apply(
-        lambda row: get_r_ttest_p(
-            row, generated_answer_field_tag="best_generated", required_speedup=required_speedup
-        ),
-        axis=1,
-    )
+    # report_df[f"p_value_{required_speedup}pct"] = report_df.apply(
+    #     lambda row: get_r_ttest_p(
+    #         row, generated_answer_field_tag="best_generated", required_speedup=required_speedup
+    #     ),
+    #     axis=1,
+    # )
 
     if len(report_df) == 0:
         print("No significant difference")
@@ -226,7 +223,6 @@ def summarize(
     # num_recs = len(report_df)
     # test_set_size = len(report_df)
     # report_df = report_df[report_df["p_value"] < 0.05]
-    # import pdb; pdb.set_trace()
     # report_df = report_df[report_df[f"p_value_{required_speedup}pct"] < 0.05]
 
     # print(f" Reference speedup: {report_df[report_df['reference_acc'] == 1]['speedup_vs_ref'].mean():.2f}x")
@@ -250,10 +246,9 @@ def summarize(
         mean_speedup = np.mean(all_speedups)
     if return_values:
         return opt_pct, mean_speedup
-    # import pdb; pdb.set_trace()
             
     # print(f"{opt_pct} & {report_df['speedup'].mean():.2f} & {report_df['speedup'].max():.2f}")
-    return report_df[['problem_id', 'submission_id_v0', 'speedup', f"p_value_{required_speedup}pct"]]
+    return report_df[['problem_id', 'submission_id_v0', 'speedup']]
     # return report_df[['problem_id', 'input', 'best_generated_soln', 'diff', 'p_value', 'p_value_10pct', 'speedup', 'speedup_vs_ref', 'cohens_d', 'best_tag']]
 
 
@@ -348,15 +343,11 @@ if __name__ == "__main__":
         # check if the file exists
         
         if os.path.exists(possible_report_path):
-            try:
-                reports[i] = summarize(report_path=possible_report_path, lang=args.lang, n_samples=32, required_speedup=args.required_speedup, return_values=False)
-                reports[i]["run"] = i
-            except: 
-                pass
-    
+            reports[i] = summarize(report_path=possible_report_path, lang=args.lang, n_samples=32, required_speedup=args.required_speedup, return_values=False)
+            reports[i]["run"] = i
 
     # concat all reports
-    report = pd.concat([pd.DataFrame.from_dict(reports[i]) for i in reports])
+    report = pd.concat([pd.DataFrame.from_dict(reports[i]) for i in reports if not reports[i].empty])
     print(report)
 
     # runs = analyze_runs(report)

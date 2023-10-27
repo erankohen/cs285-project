@@ -3,3 +3,5 @@ tqdm
 numpy
 scipy
 rpy2
+pyyaml
+psutil

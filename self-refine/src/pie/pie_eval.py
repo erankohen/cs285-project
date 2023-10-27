@@ -40,11 +40,10 @@ def cohen_d(slow, fast):
 
 
 def get_r_ttest_p(row, generated_answer_field_tag: str, input_field_tag: str = "input", required_speedup: float = 0.05):
-    
     generated_times = row[f"{generated_answer_field_tag}_stats"]
     input_times = row[f"{input_field_tag}_stats"]
     
-    if generated_times is None or input_times is None or len(generated_times) == 0 or len(input_times) == 0:
+    if generated_times is None or input_times is None or len(generated_times) <= 1 or len(input_times) <= 1:
         return 1.0
     
     p, t = call_r_ttest_offset(slow_samples = input_times, fast_samples = generated_times, offset_frac=required_speedup)
@@ -116,8 +115,8 @@ def summarize(
     default_speedup = 1
 ):
     report_df = pd.read_json(report_path, lines=True, orient="records")
-    
-    # report_df = report_df[report_df["reference_acc"] == 1]
+    report_df = report_df[report_df["reference_acc"] == 1]
+
     gen_time_cols = [c for c in report_df.columns if "generated" in c and "time_mean" in c and c != "generated_answers_time_mean"]
     
     if len(gen_time_cols) == 0:
@@ -191,12 +190,12 @@ def summarize(
     # report_df["p_value"] = report_df.apply(lambda row: get_welch_t_test_p(row), axis=1)
 
     # t = mu(input) - mu(best_generated) - X% of mu(input) / std_error (t test for a speedup of X%; Null hyp = speedup <= X%)
-    # report_df[f"p_value_{required_speedup}pct"] = report_df.apply(
-    #     lambda row: get_r_ttest_p(
-    #         row, generated_answer_field_tag="best_generated", required_speedup=required_speedup
-    #     ),
-    #     axis=1,
-    # )
+    report_df[f"p_value_{required_speedup}pct"] = report_df.apply(
+        lambda row: get_r_ttest_p(
+            row, generated_answer_field_tag="best_generated", required_speedup=required_speedup
+        ),
+        axis=1,
+    )
 
     if len(report_df) == 0:
         print("No significant difference")
@@ -223,7 +222,7 @@ def summarize(
     # num_recs = len(report_df)
     # test_set_size = len(report_df)
     # report_df = report_df[report_df["p_value"] < 0.05]
-    # report_df = report_df[report_df[f"p_value_{required_speedup}pct"] < 0.05]
+    report_df = report_df[report_df[f"p_value_{required_speedup}pct"] < 0.05]
 
     # print(f" Reference speedup: {report_df[report_df['reference_acc'] == 1]['speedup_vs_ref'].mean():.2f}x")
     
@@ -248,7 +247,7 @@ def summarize(
         return opt_pct, mean_speedup
             
     # print(f"{opt_pct} & {report_df['speedup'].mean():.2f} & {report_df['speedup'].max():.2f}")
-    return report_df[['problem_id', 'submission_id_v0', 'speedup']]
+    return report_df[['problem_id', 'submission_id_v0', 'speedup', f'p_value_{required_speedup}pct']]
     # return report_df[['problem_id', 'input', 'best_generated_soln', 'diff', 'p_value', 'p_value_10pct', 'speedup', 'speedup_vs_ref', 'cohens_d', 'best_tag']]
 
 

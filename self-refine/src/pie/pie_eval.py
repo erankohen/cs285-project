@@ -247,7 +247,7 @@ def summarize(
         return opt_pct, mean_speedup
             
     # print(f"{opt_pct} & {report_df['speedup'].mean():.2f} & {report_df['speedup'].max():.2f}")
-    return report_df[['problem_id', 'submission_id_v0', 'speedup', f'p_value_{required_speedup}pct']]
+    return report_df[['problem_id', 'submission_id_v0', 'speedup', f'p_value_{required_speedup}pct', 'speedup_vs_ref']]
     # return report_df[['problem_id', 'input', 'best_generated_soln', 'diff', 'p_value', 'p_value_10pct', 'speedup', 'speedup_vs_ref', 'cohens_d', 'best_tag']]
 
 

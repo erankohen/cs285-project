@@ -1,0 +1,17 @@
+inputs_outputs_basepath: "../self-refine/data/codenet/generated_test_cases"
+reference_file_path: "../self-refine/data/tasks/pie/codenet-python-test-1k.jsonl"
+num_problems_to_evaluate: -1
+num_trials: 4
+ignore_first_k: 0
+max_time_per_run: 10
+temp_dir: null
+model_generated_potentially_faster_code_col: "fast_code"
+slow_code_col: "input"
+reference_code_col: "target"
+is_prompt_based: false
+language: python
+return_if_acc_below: 1.0
+# num_processes: 60
+cpu_number: 0
+model_generated_outputs_path: "../tree-of-thought-llm/temp.jsonl"
+output_report_file_path: "../tree-of-thought-llm/report_votes/report0.json"

@@ -1,0 +1,43 @@
+[
+    {
+        "steps": [
+            {
+                "step": 0,
+                "x": "A, B, C, X, Y = list(map(int, input().split()))\n\n\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(10 ** 5 + 1):\n\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n\n    ans = min(ans, s)\n\n\n\nprint(ans)",
+                "ys": [
+                    ""
+                ],
+                "new_ys": [
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(ans)\n",
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    cost = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, cost)\n    \nprint(ans)\n"
+                ],
+                "values": [
+                    0.0,
+                    2.94
+                ],
+                "select_new_ys": [
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    cost = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, cost)\n    \nprint(ans)\n",
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(ans)\n"
+                ]
+            }
+        ],
+        "idx": 0,
+        "ys": [
+            "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    cost = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, cost)\n    \nprint(ans)\n",
+            "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(ans)\n"
+        ],
+        "infos": [
+            {
+                "r": 2.94
+            },
+            {
+                "r": 0.0
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 559,
+            "prompt_tokens": 3508,
+            "cost": 0.00638
+        }
+    }
+]

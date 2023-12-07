@@ -1,0 +1,74 @@
+[
+    {
+        "steps": [
+            {
+                "step": 0,
+                "x": "A, B, C, X, Y = list(map(int, input().split()))\n\n\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(10 ** 5 + 1):\n\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n\n    ans = min(ans, s)\n\n\n\nprint(ans)",
+                "ys": [
+                    ""
+                ],
+                "new_ys": [
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(ans)\n",
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(ans)\n"
+                ],
+                "values": [
+                    96.39,
+                    0
+                ],
+                "select_new_ys": [
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(ans)\n"
+                ]
+            },
+            {
+                "step": 1,
+                "x": "A, B, C, X, Y = list(map(int, input().split()))\n\n\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(10 ** 5 + 1):\n\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n\n    ans = min(ans, s)\n\n\n\nprint(ans)",
+                "ys": [
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(ans)\n"
+                ],
+                "new_ys": [
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nif X > Y:\n    ans = min(A*X, C*2*Y + A*(X-Y))\nelse:\n    ans = min(B*Y, C*2*X + B*(Y-X))\n\nprint(ans)\n",
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\n# Scenario 1: Buy all pizzas from one type\ncost = max(X, Y) * C\nans = min(ans, cost)\n\n# Scenario 2: Buy equal number of pizzas from both types\nmax_pizzas = max(X, Y)\ncost = max_pizzas * 2 * C\nans = min(ans, cost)\n\n# Scenario 3: Buy remaining pizzas from one type and remaining from the other type\nif X > Y:\n    remaining = X - Y\n    cost = remaining * A\n    ans = min(ans, cost)\nelse:\n    remaining = Y - X\n    cost = remaining * B\n    ans = min(ans, cost)\n\nprint(ans)\n"
+                ],
+                "values": [
+                    1.0,
+                    2.0
+                ],
+                "select_new_ys": [
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\n# Scenario 1: Buy all pizzas from one type\ncost = max(X, Y) * C\nans = min(ans, cost)\n\n# Scenario 2: Buy equal number of pizzas from both types\nmax_pizzas = max(X, Y)\ncost = max_pizzas * 2 * C\nans = min(ans, cost)\n\n# Scenario 3: Buy remaining pizzas from one type and remaining from the other type\nif X > Y:\n    remaining = X - Y\n    cost = remaining * A\n    ans = min(ans, cost)\nelse:\n    remaining = Y - X\n    cost = remaining * B\n    ans = min(ans, cost)\n\nprint(ans)\n"
+                ]
+            },
+            {
+                "step": 2,
+                "x": "A, B, C, X, Y = list(map(int, input().split()))\n\n\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(10 ** 5 + 1):\n\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n\n    ans = min(ans, s)\n\n\n\nprint(ans)",
+                "ys": [
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\n# Scenario 1: Buy all pizzas from one type\ncost = max(X, Y) * C\nans = min(ans, cost)\n\n# Scenario 2: Buy equal number of pizzas from both types\nmax_pizzas = max(X, Y)\ncost = max_pizzas * 2 * C\nans = min(ans, cost)\n\n# Scenario 3: Buy remaining pizzas from one type and remaining from the other type\nif X > Y:\n    remaining = X - Y\n    cost = remaining * A\n    ans = min(ans, cost)\nelse:\n    remaining = Y - X\n    cost = remaining * B\n    ans = min(ans, cost)\n\nprint(ans)\n"
+                ],
+                "new_ys": [
+                    "python\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\n# Scenario 1: Buy all pizzas from one type\ncost = max(X, Y) * C\nans = min(ans, cost)\n\n# Scenario 2: Buy equal number of pizzas from both types\nmin_pizzas = min(X, Y)\ncost = min_pizzas * 2 * C\nans = min(ans, cost)\n\n# Scenario 3: Buy remaining pizzas from one type and remaining from the other type\nif X > Y:\n    remaining = X - Y\n    cost = remaining * A\n    ans = min(ans, cost)\nelse:\n    remaining = Y - X\n    cost = remaining * B\n    ans = min(ans, cost)\n\nprint(ans)\n",
+                    "python\nA, B, C, X, Y = list(map(int, input().split()))\n\n# Calculate the cost for buying all pizzas from one type\ncost_one_type = max(X, Y) * C\n\n# Calculate the cost for buying an equal number of pizzas from both types\nmax_pizzas = max(X, Y)\ncost_both_types = max_pizzas * 2 * C\n\n# Choose the minimum cost\nans = min(cost_one_type, cost_both_types)\n\nprint(ans)\n"
+                ],
+                "values": [
+                    1.0,
+                    24.98
+                ],
+                "select_new_ys": [
+                    "python\nA, B, C, X, Y = list(map(int, input().split()))\n\n# Calculate the cost for buying all pizzas from one type\ncost_one_type = max(X, Y) * C\n\n# Calculate the cost for buying an equal number of pizzas from both types\nmax_pizzas = max(X, Y)\ncost_both_types = max_pizzas * 2 * C\n\n# Choose the minimum cost\nans = min(cost_one_type, cost_both_types)\n\nprint(ans)\n"
+                ]
+            }
+        ],
+        "idx": 0,
+        "ys": [
+            "python\nA, B, C, X, Y = list(map(int, input().split()))\n\n# Calculate the cost for buying all pizzas from one type\ncost_one_type = max(X, Y) * C\n\n# Calculate the cost for buying an equal number of pizzas from both types\nmax_pizzas = max(X, Y)\ncost_both_types = max_pizzas * 2 * C\n\n# Choose the minimum cost\nans = min(cost_one_type, cost_both_types)\n\nprint(ans)\n"
+        ],
+        "infos": [
+            {
+                "r": 0
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 2104,
+            "prompt_tokens": 9494,
+            "cost": 0.018449
+        }
+    }
+]

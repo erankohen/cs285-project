@@ -1,0 +1,91 @@
+[
+    {
+        "steps": [
+            {
+                "step": 0,
+                "x": "A, B, C, X, Y = list(map(int, input().split()))\n\n\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(10 ** 5 + 1):\n\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n\n    ans = min(ans, s)\n\n\n\nprint(ans)",
+                "ys": [
+                    ""
+                ],
+                "new_ys": [
+                    " B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(an",
+                    " B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(an"
+                ],
+                "values": [
+                    91.66499999999999,
+                    0
+                ],
+                "select_new_ys": [
+                    " B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(an",
+                    " B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(an"
+                ]
+            },
+            {
+                "step": 1,
+                "x": "A, B, C, X, Y = list(map(int, input().split()))\n\n\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(10 ** 5 + 1):\n\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n\n    ans = min(ans, s)\n\n\n\nprint(ans)",
+                "ys": [
+                    " B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(an",
+                    " B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(an"
+                ],
+                "new_ys": [
+                    "hon\nB, C, X, Y = list(map(int, input().split()))\n\n# Case 1: X > Y\ncost1 = Y * min(B, 2 * C) + (X - Y) * min(A, 2 * C)\n\n# Case 2: X < Y\ncost2 = X * min(A, 2 * C) + (Y - X) * min(B, 2 * C)\n\n# Case 3: X = Y\ncost3 = X * min(A + B, 2 * C)\n\n# Find the minimum cost among the three cases\nans = min(cost1, cost2, cost3)\n\nprint(an",
+                    " C, X, Y = list(map(int, input().split()))\n\ncost_C = max(X, Y) * 2 * C\ncost_A_B = min(X, Y) * 2 * C + abs(X - Y) * min(A, B)\n\nans = min(cost_C, cost_A_B)\n\nprint(an",
+                    " C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(an",
+                    " C, X, Y = list(map(int, input().split()))\n\nif X > Y:\n    ans = min(X, Y) * min(2 * C, A + B) + (X - Y) * min(2 * C, A)\nelif X < Y:\n    ans = min(X, Y) * min(2 * C, A + B) + (Y - X) * min(2 * C, B)\nelse:\n    ans = X * min(2 * C, A + B)\n\nprint(an"
+                ],
+                "values": [
+                    99.995,
+                    5.5,
+                    0.5,
+                    1.43
+                ],
+                "select_new_ys": [
+                    "hon\nB, C, X, Y = list(map(int, input().split()))\n\n# Case 1: X > Y\ncost1 = Y * min(B, 2 * C) + (X - Y) * min(A, 2 * C)\n\n# Case 2: X < Y\ncost2 = X * min(A, 2 * C) + (Y - X) * min(B, 2 * C)\n\n# Case 3: X = Y\ncost3 = X * min(A + B, 2 * C)\n\n# Find the minimum cost among the three cases\nans = min(cost1, cost2, cost3)\n\nprint(an",
+                    " C, X, Y = list(map(int, input().split()))\n\ncost_C = max(X, Y) * 2 * C\ncost_A_B = min(X, Y) * 2 * C + abs(X - Y) * min(A, B)\n\nans = min(cost_C, cost_A_B)\n\nprint(an"
+                ]
+            },
+            {
+                "step": 2,
+                "x": "A, B, C, X, Y = list(map(int, input().split()))\n\n\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(10 ** 5 + 1):\n\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n\n    ans = min(ans, s)\n\n\n\nprint(ans)",
+                "ys": [
+                    "hon\nB, C, X, Y = list(map(int, input().split()))\n\n# Case 1: X > Y\ncost1 = Y * min(B, 2 * C) + (X - Y) * min(A, 2 * C)\n\n# Case 2: X < Y\ncost2 = X * min(A, 2 * C) + (Y - X) * min(B, 2 * C)\n\n# Case 3: X = Y\ncost3 = X * min(A + B, 2 * C)\n\n# Find the minimum cost among the three cases\nans = min(cost1, cost2, cost3)\n\nprint(an",
+                    " C, X, Y = list(map(int, input().split()))\n\ncost_C = max(X, Y) * 2 * C\ncost_A_B = min(X, Y) * 2 * C + abs(X - Y) * min(A, B)\n\nans = min(cost_C, cost_A_B)\n\nprint(an"
+                ],
+                "new_ys": [
+                    " C, X, Y = list(map(int, input().split()))\n\nmin_ab = min(B, A)\n\n# Case 1: X > Y\ncost1 = Y * min_ab + (X - Y) * min_ab\n\n# Case 2: X < Y\ncost2 = X * min_ab + (Y - X) * min_ab\n\n# Case 3: X = Y\ncost3 = X * (A + B)\n\n# Find the minimum cost among the three cases\nans = min(cost1, cost2, cost3)\n\nprint(an",
+                    "hon\nA, B, X, Y = list(map(int, input().split()))\n\n# Calculate the cost for buying only X and Y separately\ncost1 = X * A + Y * B\n\n# Calculate the cost for buying items in pairs\ncost2 = 0\nif X > Y:\n    cost2 = Y * (2 * C) + (X - Y) * A\nelif X < Y:\n    cost2 = X * (2 * C) + (Y - X) * B\n\n# Find the minimum cost among the two cases\nans = min(cost1, cost2)\n\nprint(an",
+                    " X, Y = list(map(int, input().split()))\n\ncost_C = max(X, Y) * 2 * C\ncost_A_B = min(X, Y) * 2 * C + abs(X - Y) * min(A, B)\ncost_A = X * A + (Y - X) * C\ncost_B = Y * B + (X - Y) * C\n\nans = min(cost_C, cost_A_B, cost_A, cost_B)\n\nprint(an",
+                    " X, Y = list(map(int, input().split()))\n\ncost_C = max(X, Y) * 2 * C\ncost_A_B = min(X, Y) * 2 * C + abs(X - Y) * min(A, B)\n\nans = min(cost_C, cost_A_B)\n\nprint(an"
+                ],
+                "values": [
+                    61.65,
+                    33.835,
+                    0.9099999999999999,
+                    2.0
+                ],
+                "select_new_ys": [
+                    " C, X, Y = list(map(int, input().split()))\n\nmin_ab = min(B, A)\n\n# Case 1: X > Y\ncost1 = Y * min_ab + (X - Y) * min_ab\n\n# Case 2: X < Y\ncost2 = X * min_ab + (Y - X) * min_ab\n\n# Case 3: X = Y\ncost3 = X * (A + B)\n\n# Find the minimum cost among the three cases\nans = min(cost1, cost2, cost3)\n\nprint(an",
+                    "hon\nA, B, X, Y = list(map(int, input().split()))\n\n# Calculate the cost for buying only X and Y separately\ncost1 = X * A + Y * B\n\n# Calculate the cost for buying items in pairs\ncost2 = 0\nif X > Y:\n    cost2 = Y * (2 * C) + (X - Y) * A\nelif X < Y:\n    cost2 = X * (2 * C) + (Y - X) * B\n\n# Find the minimum cost among the two cases\nans = min(cost1, cost2)\n\nprint(an"
+                ]
+            }
+        ],
+        "idx": 0,
+        "ys": [
+            " C, X, Y = list(map(int, input().split()))\n\nmin_ab = min(B, A)\n\n# Case 1: X > Y\ncost1 = Y * min_ab + (X - Y) * min_ab\n\n# Case 2: X < Y\ncost2 = X * min_ab + (Y - X) * min_ab\n\n# Case 3: X = Y\ncost3 = X * (A + B)\n\n# Find the minimum cost among the three cases\nans = min(cost1, cost2, cost3)\n\nprint(an",
+            "hon\nA, B, X, Y = list(map(int, input().split()))\n\n# Calculate the cost for buying only X and Y separately\ncost1 = X * A + Y * B\n\n# Calculate the cost for buying items in pairs\ncost2 = 0\nif X > Y:\n    cost2 = Y * (2 * C) + (X - Y) * A\nelif X < Y:\n    cost2 = X * (2 * C) + (Y - X) * B\n\n# Find the minimum cost among the two cases\nans = min(cost1, cost2)\n\nprint(an"
+        ],
+        "infos": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 4216,
+            "prompt_tokens": 16416,
+            "cost": 0.033056
+        }
+    }
+]

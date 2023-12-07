@@ -44,7 +44,13 @@ def get_samples(task, x, y, n_generate_sample, prompt_sample, stop):
     else:
         raise ValueError(f'prompt_sample {prompt_sample} not recognized')
     samples = gpt(prompt, n=n_generate_sample, stop=stop)
-    return [y + _ for _ in samples]
+    # can add y + _ for the old tasks
+    return [task.standard_prompt_unwrap(y, _) for _ in samples]
+
+def softmax_stable(x):
+    x = np.array(x)
+    exp = np.exp(x - np.max(x))
+    return exp / exp.sum()
 
 def solve(args, task, idx, to_print=True):
     global gpt
@@ -69,7 +75,8 @@ def solve(args, task, idx, to_print=True):
 
         # selection
         if args.method_select == 'sample':
-            ps = np.array(values) / sum(values)
+            # ps = np.array(values) / sum(values)
+            ps = softmax_stable(values)
             select_ids = np.random.choice(ids, size=args.n_select_sample, p=ps).tolist()
         elif args.method_select == 'greedy':
             select_ids = sorted(ids, key=lambda x: values[x], reverse=True)[:args.n_select_sample]

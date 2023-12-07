@@ -1,0 +1,84 @@
+[
+    {
+        "steps": [
+            {
+                "step": 0,
+                "x": "A, B, C, X, Y = list(map(int, input().split()))\n\n\n\nans = 5000 * 2 * 10 ** 5\n\nfor i in range(10 ** 5 + 1):\n\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n\n    ans = min(ans, s)\n\n\n\nprint(ans)",
+                "ys": [
+                    ""
+                ],
+                "new_ys": [
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    cost = i * 2 * C + max(X - i, 0) * A + max(Y - i, 0) * B\n    ans = min(ans, cost)\n\nprint(ans)\n",
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(ans)\n"
+                ],
+                "values": [
+                    94.43,
+                    1.0
+                ],
+                "select_new_ys": [
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    cost = i * 2 * C + max(X - i, 0) * A + max(Y - i, 0) * B\n    ans = min(ans, cost)\n\nprint(ans)\n",
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(ans)\n"
+                ]
+            }
+        ],
+        "idx": 0,
+        "ys": [
+            "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    cost = i * 2 * C + max(X - i, 0) * A + max(Y - i, 0) * B\n    ans = min(ans, cost)\n\nprint(ans)\n",
+            "\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    s = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, s)\n\nprint(ans)\n"
+        ],
+        "infos": [
+            {
+                "r": 94.43
+            },
+            {
+                "r": 1.0
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 624,
+            "prompt_tokens": 3498,
+            "cost": 0.006495000000000001
+        }
+    },
+    {
+        "steps": [
+            {
+                "step": 0,
+                "x": "import sys\n\n\n\nread = sys.stdin.buffer.read\n\nreadline = sys.stdin.buffer.readline\n\nreadlines = sys.stdin.buffer.readlines\n\n\n\nN = int(read())\n\nx = N + (-N) % 1000\n\nprint((x - N))",
+                "ys": [
+                    ""
+                ],
+                "new_ys": [
+                    "\nN = int(input())\nx = N - (N % 1000)\nprint(x - N)\n",
+                    "\nimport sys\n\nread = sys.stdin.buffer.read\nreadline = sys.stdin.buffer.readline\nreadlines = sys.stdin.buffer.readlines\n\nN = int(read())\n\nx = N - (N % 1000)\n\nprint(x)\n"
+                ],
+                "values": [
+                    29.81,
+                    12.0
+                ],
+                "select_new_ys": [
+                    "\nN = int(input())\nx = N - (N % 1000)\nprint(x - N)\n",
+                    "\nimport sys\n\nread = sys.stdin.buffer.read\nreadline = sys.stdin.buffer.readline\nreadlines = sys.stdin.buffer.readlines\n\nN = int(read())\n\nx = N - (N % 1000)\n\nprint(x)\n"
+                ]
+            }
+        ],
+        "idx": 1,
+        "ys": [
+            "\nN = int(input())\nx = N - (N % 1000)\nprint(x - N)\n",
+            "\nimport sys\n\nread = sys.stdin.buffer.read\nreadline = sys.stdin.buffer.readline\nreadlines = sys.stdin.buffer.readlines\n\nN = int(read())\n\nx = N - (N % 1000)\n\nprint(x)\n"
+        ],
+        "infos": [
+            {
+                "r": 29.81
+            },
+            {
+                "r": 12.0
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 943,
+            "prompt_tokens": 6779,
+            "cost": 0.012054500000000001
+        }
+    }
+]

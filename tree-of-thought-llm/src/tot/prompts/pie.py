@@ -173,7 +173,7 @@ while i * i <= n:
 print('Yes' if flag else 'No')
 ```
 
-# Explain why the improved code is faster and at the last line conclude "Thus the efficiency improvement fraction is {s}.", where s is the difference in runtime normalized by the slow time.
+# Explain why the improved code is faster and at the last line conclude "Thus the efficiency improvement fraction is s.", where s is the difference in runtime normalized by the slow time.
 
 This code is slow because it is using a brute force approach to find the square root of the input number. It is looping through every possible number starting from 0 until n. Note that the sqare root will be smaller than n, so at least half of the numbers it is looping through are unnecessary. At most, you need to loop through the numbers up to the square root of n. Thus the efficiency improvement fraction is 3.96.
 
@@ -218,7 +218,7 @@ if __name__ == '__main__':
     main()
 ```
 
-# Explain why the improved code is faster and at the last line conclude "Thus the efficiency improvement fraction is {s}.", where s is the difference in runtime normalized by the slow time.
+# Explain why the improved code is faster and at the last line conclude "Thus the efficiency improvement fraction is s.", where s is the difference in runtime normalized by the slow time.
 
 This code is slow because it is using a brute force approach to search for the target number in the list of numbers. It is looping through the list for every target number, which can take a long time if the list is very large. A more efficient approach would be to use a data structure such as a hash table, which can perform lookups in constant time. Thus the efficiency improvement fraction is 6.89. 
 
@@ -242,7 +242,7 @@ n = int(N**0.5)
 print(n**2)
 ```
 
-# Explain why the improved code is faster and at the last line conclude "Thus the efficiency improvement fraction is {s}.", where s is the difference in runtime normalized by the slow time.
+# Explain why the improved code is faster and at the last line conclude "Thus the efficiency improvement fraction is s.", where s is the difference in runtime normalized by the slow time.
 
 This code is slow because it is using numpy for calculating the square root of the input number. Numpy is much slower than using the built-in math module, which can calculate the square root faster. Thus the efficiency improvement fraction is 84.26. 
 
@@ -278,11 +278,11 @@ if r == 1:
 else:
     print(q)
 ```
-# Explain why the improved code is faster and at the last line conclude "Thus the efficiency improvement fraction is {s}.", where s is the difference in runtime normalized by the slow time.
+# Explain why the improved code is faster and at the last line conclude "Thus the efficiency improvement fraction is s.", where s is the difference in runtime normalized by the slow time.
 
 This code is slow because it is using numpy to calculate the range of numbers from 1 to 2^27. This is an extremely large range and numpy is slow at calculating such a large range. A more efficient approach would be to use a loop to calculate the range, which would be much faster. Thus the efficiency improvement fraction is 93.99.
 
-### END ###s
+### END ###
 
 # Slow code:
 ```
@@ -295,7 +295,7 @@ This code is slow because it is using numpy to calculate the range of numbers fr
 
 ```
 
-# Explain why the improved code is faster and at the last line conclude "Thus the efficiency improvement fraction is {s}", where s is the difference in runtime normalized by the slow time.
+# Explain why the improved code is faster and at the last line conclude "Thus the efficiency improvement fraction is s.", where s is the difference in runtime normalized by the slow time.
 
 
 '''
@@ -309,5 +309,5 @@ vote_prompt = '''
 
 {improved_versions}
 
-Decide which of the improved versions above is most efficient. Analyze each choice in detail, then conclude in the last line "The best choice is {s}", where s the integer id of the choice.
+Decide which of the improved versions above is most efficient. Analyze each choice in detail, then conclude in the last line "The best choice is s", where s the integer id of the choice.
 '''

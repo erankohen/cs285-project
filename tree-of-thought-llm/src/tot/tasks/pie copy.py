@@ -3,7 +3,7 @@ import re
 import json
 from tot.tasks.base import Task, DATA_PATH
 from tot.prompts.pie import * 
-import tot.methods.bfs as bfs
+
 
 class PieTask(Task):
     def __init__(self, file='../../self-refine/data/tasks/pie/codenet-python-test-1k.jsonl'):
@@ -12,7 +12,7 @@ class PieTask(Task):
         self.data = []
         for line in data: 
             self.data.append(json.loads(line)) 
-        self.steps = 1
+        self.steps = 3
         self.stops = ['### END ###'] * self.steps
         self.value_cache = {}
 
@@ -22,14 +22,40 @@ class PieTask(Task):
     def get_input(self, idx: int) -> str:
         return self.data[idx]['input']
 
-    def test_output(self, idx: int, outputs: str, method: str):
+    def test_output(self, idx: int, output: str):
         # check pie eval
         slow_code = self.get_input(idx)
-        if method == "value":
-            rs = [bfs.get_value(self, slow_code, output, 2, cache_value=True) for output in outputs]
-        else: 
-            rs = bfs.get_votes(self, slow_code, outputs, 3)
-        return [{'r': r} for r in rs]
+
+        yaml_content = '''
+inputs_outputs_basepath: "../self-refine/data/codenet"
+reference_file_path: "../self-refine/data/tasks/pie/codenet-python-test-1k.jsonl"
+num_problems_to_evaluate: -1
+num_trials: 4
+ignore_first_k: 0
+max_time_per_run: 10
+temp_dir: null
+model_generated_potentially_faster_code_col: "fast_code"
+slow_code_col: "input"
+reference_code_col: "target"
+is_prompt_based: false
+language: python
+return_if_acc_below: 1.0
+# num_processes: 60
+cpu_number: 0
+model_generated_outputs_path: "../tree-of-thought-llm/temp.json"
+output_report_file_path: "../tree-of-thought-llm/report.json"
+'''
+        
+        json_content = {
+            **self.data[idx],
+            'slow_code': slow_code,
+            'fast_code': output
+        }
+        with open('../temp.json', 'w+') as f:
+            json.dump(json_content, f)
+        
+        os.system('bash run_pie_eval.sh')
+        return 
         
     @staticmethod 
     def standard_prompt_wrap(x: str, y:str) -> str: 
@@ -38,31 +64,6 @@ class PieTask(Task):
     @staticmethod
     def value_prompt_wrap(x: str, y: str) -> str:
         return value_prompt.format(slow_code=x, improved_code=y)
-
-    @staticmethod
-    def vote_prompt_wrap(x: str, ys: list) -> str:
-        options = ''
-        for i, y in enumerate(ys, 1):
-            # y = y.replace('Plan:\n', '')
-            # TODO: truncate the plan part?
-            options += f'Choice {i}:\n```\n{y}\n```\n'
-        prompt = vote_prompt.format(slow_code=x, improved_versions=options)
-        return prompt
-    
-    @staticmethod
-    def vote_outputs_unwrap(vote_outputs: list, n_candidates: int) -> list:
-        vote_results = [0] * n_candidates
-        for vote_output in vote_outputs:
-            pattern = r".*best choice is .*(\d+).*"
-            match = re.match(pattern, vote_output, re.DOTALL)
-            if match:
-                vote = int(match.groups()[0]) - 1
-                if vote in range(n_candidates):
-                    vote_results[vote] += 1
-            else:
-                print(f'vote no match: {[vote_output]}')
-        return vote_results
-    
     
     @staticmethod
     def value_outputs_unwrap(x: str, y: str, value_outputs: list) -> float:
@@ -82,5 +83,3 @@ class PieTask(Task):
         pattern = r"```(.*)```"
         match = re.findall(pattern, sample, re.DOTALL)[-1]
         return match
-        
-        

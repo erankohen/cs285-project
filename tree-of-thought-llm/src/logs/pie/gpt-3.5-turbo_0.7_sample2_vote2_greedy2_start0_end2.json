@@ -8,36 +8,36 @@
                     ""
                 ],
                 "new_ys": [
-                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\ncost1 = A*X + B*Y\n\nif X > Y:\n  cost2 = C*2*Y + A*(X-Y)\nelse:\n  cost2 = C*2*X + B*(Y-X)\n\nans = min(cost1, cost2)\n\nprint(ans)\n",
-                    "python\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    cost = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, cost)\n\nprint(ans)\n"
+                    "python\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    cost = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, cost)\n\nprint(ans)\n",
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\ncost = X * A + Y * B\ncost_discounted = max(X, Y) * 2 * C\ncost_remaining = (X - min(X, Y)) * A + (Y - min(X, Y)) * B\n\nmin_cost = min(cost, cost_discounted + cost_remaining)\n\nprint(min_cost)\n"
                 ],
                 "values": [
-                    1,
-                    1
+                    0,
+                    2
                 ],
                 "select_new_ys": [
-                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\ncost1 = A*X + B*Y\n\nif X > Y:\n  cost2 = C*2*Y + A*(X-Y)\nelse:\n  cost2 = C*2*X + B*(Y-X)\n\nans = min(cost1, cost2)\n\nprint(ans)\n",
+                    "\nA, B, C, X, Y = list(map(int, input().split()))\n\ncost = X * A + Y * B\ncost_discounted = max(X, Y) * 2 * C\ncost_remaining = (X - min(X, Y)) * A + (Y - min(X, Y)) * B\n\nmin_cost = min(cost, cost_discounted + cost_remaining)\n\nprint(min_cost)\n",
                     "python\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    cost = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, cost)\n\nprint(ans)\n"
                 ]
             }
         ],
         "idx": 0,
         "ys": [
-            "\nA, B, C, X, Y = list(map(int, input().split()))\n\ncost1 = A*X + B*Y\n\nif X > Y:\n  cost2 = C*2*Y + A*(X-Y)\nelse:\n  cost2 = C*2*X + B*(Y-X)\n\nans = min(cost1, cost2)\n\nprint(ans)\n",
+            "\nA, B, C, X, Y = list(map(int, input().split()))\n\ncost = X * A + Y * B\ncost_discounted = max(X, Y) * 2 * C\ncost_remaining = (X - min(X, Y)) * A + (Y - min(X, Y)) * B\n\nmin_cost = min(cost, cost_discounted + cost_remaining)\n\nprint(min_cost)\n",
             "python\nA, B, C, X, Y = list(map(int, input().split()))\n\nans = float('inf')\n\nfor i in range(max(X, Y) + 1):\n    cost = i * 2 * C + max(0, X - i) * A + max(0, Y - i) * B\n    ans = min(ans, cost)\n\nprint(ans)\n"
         ],
         "infos": [
             {
-                "r": 1
+                "r": 2
             },
             {
-                "r": 2
+                "r": 1
             }
         ],
         "usage_so_far": {
-            "completion_tokens": 1904,
-            "prompt_tokens": 1650,
-            "cost": 0.0062829999999999995
+            "completion_tokens": 2397,
+            "prompt_tokens": 1668,
+            "cost": 0.0072959999999999995
         }
     },
     {
@@ -49,36 +49,36 @@
                     ""
                 ],
                 "new_ys": [
-                    "\nimport sys\n\nread = sys.stdin.buffer.read\nreadline = sys.stdin.buffer.readline\nreadlines = sys.stdin.buffer.readlines\n\nN = int(read())\n\nx = (N // 1000) * 1000\n\nprint(x - N)\n",
-                    "\nN = int(input())\n\nx = (N // 1000) * 1000\n\nprint(x - N)\n"
+                    "python\nN = int(input())\n\nx = (N // 1000) * 1000 + 1000\n\nprint(x - N)\n",
+                    "\nimport sys\n\nread = sys.stdin.buffer.read\nreadline = sys.stdin.buffer.readline\nreadlines = sys.stdin.buffer.readlines\n\nN = int(read())\nx = (N // 1000) * 1000\nprint(x - N)\n"
                 ],
                 "values": [
-                    2,
-                    0
+                    1,
+                    1
                 ],
                 "select_new_ys": [
-                    "\nimport sys\n\nread = sys.stdin.buffer.read\nreadline = sys.stdin.buffer.readline\nreadlines = sys.stdin.buffer.readlines\n\nN = int(read())\n\nx = (N // 1000) * 1000\n\nprint(x - N)\n",
-                    "\nN = int(input())\n\nx = (N // 1000) * 1000\n\nprint(x - N)\n"
+                    "python\nN = int(input())\n\nx = (N // 1000) * 1000 + 1000\n\nprint(x - N)\n",
+                    "\nimport sys\n\nread = sys.stdin.buffer.read\nreadline = sys.stdin.buffer.readline\nreadlines = sys.stdin.buffer.readlines\n\nN = int(read())\nx = (N // 1000) * 1000\nprint(x - N)\n"
                 ]
             }
         ],
         "idx": 1,
         "ys": [
-            "\nimport sys\n\nread = sys.stdin.buffer.read\nreadline = sys.stdin.buffer.readline\nreadlines = sys.stdin.buffer.readlines\n\nN = int(read())\n\nx = (N // 1000) * 1000\n\nprint(x - N)\n",
-            "\nN = int(input())\n\nx = (N // 1000) * 1000\n\nprint(x - N)\n"
+            "python\nN = int(input())\n\nx = (N // 1000) * 1000 + 1000\n\nprint(x - N)\n",
+            "\nimport sys\n\nread = sys.stdin.buffer.read\nreadline = sys.stdin.buffer.readline\nreadlines = sys.stdin.buffer.readlines\n\nN = int(read())\nx = (N // 1000) * 1000\nprint(x - N)\n"
         ],
         "infos": [
             {
-                "r": 2
+                "r": 1
             },
             {
-                "r": 1
+                "r": 2
             }
         ],
         "usage_so_far": {
-            "completion_tokens": 3822,
-            "prompt_tokens": 3009,
-            "cost": 0.012157500000000002
+            "completion_tokens": 4411,
+            "prompt_tokens": 3039,
+            "cost": 0.0133805
         }
     }
 ]

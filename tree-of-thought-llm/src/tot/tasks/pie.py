@@ -12,7 +12,7 @@ class PieTask(Task):
         self.data = []
         for line in data: 
             self.data.append(json.loads(line)) 
-        self.steps = 1
+        self.steps = 4
         self.stops = ['### END ###'] * self.steps
         self.value_cache = {}
 

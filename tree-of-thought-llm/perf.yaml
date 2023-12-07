@@ -14,4 +14,4 @@ return_if_acc_below: 1.0
 # num_processes: 60
 cpu_number: 0
 model_generated_outputs_path: "../tree-of-thought-llm/temp.jsonl"
-output_report_file_path: "../tree-of-thought-llm/report_votes/report0.json"
+output_report_file_path: "../tree-of-thought-llm/reports/report0.json"

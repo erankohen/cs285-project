@@ -45,7 +45,8 @@ def get_samples(task, x, y, n_generate_sample, prompt_sample, stop):
         raise ValueError(f'prompt_sample {prompt_sample} not recognized')
     samples = gpt(prompt, n=n_generate_sample, stop=stop)
     # can add y + _ for the old tasks
-    return [task.standard_prompt_unwrap(y, _) for _ in samples]
+    outputs = [task.standard_prompt_unwrap(y, _) for _ in samples]
+    return list(filter(None, outputs))
 
 def softmax_stable(x):
     x = np.array(x)

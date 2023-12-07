@@ -80,7 +80,10 @@ class PieTask(Task):
     @staticmethod
     def standard_prompt_unwrap(input: str, sample: str) -> str:
         pattern = r"```(.*)```"
-        match = re.findall(pattern, sample, re.DOTALL)[-1]
-        return match
+        match = re.findall(pattern, sample, re.DOTALL)
+        if match: 
+            return match[-1]
+        else:
+            return ""
         
         

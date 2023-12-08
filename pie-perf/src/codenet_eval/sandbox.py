@@ -66,7 +66,7 @@ def run_python_code_on_inputs(
 
     times_millisec, accs = [], []
     per_trial_times = []
-    for test_case_idx in range(num_test_cases):
+    for test_case_idx in np.random.choice(np.arange(len(ground_truths)), num_test_cases, replace=False):
         if is_linux(): 
             cmd = (
                 f"taskset --cpu-list {cpu_number} {python_bin} {code_path}"  # taskset 00 python code.py

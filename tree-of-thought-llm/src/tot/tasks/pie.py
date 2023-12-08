@@ -4,9 +4,24 @@ import json
 from tot.tasks.base import Task, DATA_PATH
 from tot.prompts.pie import * 
 import tot.methods.bfs as bfs
+import numpy as np 
+from src.codenet_eval.sandbox import run_code_on_inputs
+import glob
 
 class PieTask(Task):
-    def __init__(self, file='../../self-refine/data/tasks/pie/codenet-python-test-1k.jsonl'):
+    ideas = [
+        '',
+        'using mathematical reasoning',
+        'using numpy vectorizations',
+        'using fancy indexing',
+        'using more efficient packages',
+        'using built-in functions',
+        'using bitwise operations',
+        'using algorithmic improvements',
+        'using list comprehensions'
+    ]
+    
+    def __init__(self, file='../../self-refine/data/tasks/pie/codenet-python-test-1k.jsonl', run_count=3, test_count=10):
         with open(file) as f:
             data = f.readlines()
         self.data = []
@@ -15,6 +30,14 @@ class PieTask(Task):
         self.steps = 4
         self.stops = ['### END ###'] * self.steps
         self.value_cache = {}
+
+        self.runtime_cache = {}
+        self.run_count = run_count
+        self.test_count = test_count
+        self.ground_truth_cache = {}
+
+        self.code_path = './temp.py'
+        self.inputs_outputs_basepath = "../../self-refine/data/codenet/generated_test_cases"
 
     def __len__(self) -> int:
         return len(self.data)
@@ -32,8 +55,11 @@ class PieTask(Task):
         return [{'r': r} for r in rs]
         
     @staticmethod 
-    def standard_prompt_wrap(x: str, y:str) -> str: 
-        return standard_prompt.format(input=y if y else x)
+    def standard_prompt_wrap(x: str, y:str, use_idea:bool) -> str:
+        idea = ""
+        if use_idea:
+            idea = np.random.choice(PieTask.ideas, 1)[0]
+        return standard_prompt.format(input=y if y else x, idea=idea)
         
     @staticmethod
     def value_prompt_wrap(x: str, y: str) -> str:
@@ -82,8 +108,62 @@ class PieTask(Task):
         pattern = r"```(.*)```"
         match = re.findall(pattern, sample, re.DOTALL)
         if match: 
+            if match[-1][:7] == "python\n": 
+                return match[-1][7:]
             return match[-1]
         else:
             return ""
+    
+    def get_ground_truth_values(self, idx, x, ys):
+        if x in self.runtime_cache:
+            x_time = self.runtime_cache[x]
+        else:
+            x_time = self.run(idx, x)
+            assert not np.isnan(x_time)
+
+        y_times = []
+        for y in ys:
+            if y in self.runtime_cache:
+                y_times.append(self.runtime_cache[y])
+            else:
+                y_times.append(self.run(idx, y))
+        
+        return list((x_time - np.array(y_times)) / x_time)
         
         
+
+    def run(self, idx:int, code: str): 
+        problem_id = self.data[idx]['problem_id']
+        problem_path = f'{self.inputs_outputs_basepath}/{problem_id}'
+
+        ground_truths = []
+        if idx in self.ground_truth_cache:
+            ground_truths = self.ground_truth_cache[idx]
+        else:
+            num_test_cases = len(
+                glob.glob(f"{self.inputs_outputs_basepath}/{problem_id}/output*.txt")
+            )
+            assert (
+                num_test_cases > 0
+            ), f"{self.inputs_outputs_basepath}/{problem_id} has no ground truth files!"
+            for i in range(num_test_cases):
+                with open(f"{problem_path}/output.{i}.txt") as f:
+                    ground_truths.append(f.read().strip() + "\n")
+            self.ground_truth_cache[idx] = ground_truths
+        
+        with open(self.code_path, 'w+') as f:
+            f.write(code)
+
+        avg_time, std_time, avg_acc, stats = run_code_on_inputs(
+            language='python',
+            code_path=self.code_path,
+            ground_truths=ground_truths,
+            unit_test_data_basepath=problem_path,
+            num_runs_per_test_case=self.run_count,
+            ignore_first_k=0,
+            max_seconds_per_run=10,
+            cpu_number=0,
+            return_if_acc_below=1.0,
+        )
+
+        return avg_time * (float('inf') ** (not avg_acc))

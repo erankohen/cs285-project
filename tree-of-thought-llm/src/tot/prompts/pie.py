@@ -140,7 +140,7 @@ else:
 ```
 {input}
 ```
-# Explain why this code is slow and write a more efficient version. Wrap the code around with ```. 
+# Explain why this code is slow and write a more efficient version {idea}. Wrap the code around with ```. 
 '''
 
 value_prompt = '''

@@ -38,13 +38,24 @@ def get_proposals(task, x, y):
     return [y + _ + '\n' for _ in proposals]
 
 def get_samples(args, task, x, y, n_generate_sample, prompt_sample, stop):
-    if prompt_sample == 'standard':
-        prompt = task.standard_prompt_wrap(x, y, args.use_idea)
-    elif prompt_sample == 'cot':
-        prompt = task.cot_prompt_wrap(x, y)
-    else:
-        raise ValueError(f'prompt_sample {prompt_sample} not recognized')
-    samples = gpt(prompt, n=n_generate_sample, stop=stop)
+    # if prompt_sample == 'standard':
+    #     prompt = task.standard_prompt_wrap(x, y, args.use_idea)
+    # elif prompt_sample == 'cot':
+    #     prompt = task.cot_prompt_wrap(x, y)
+    # else:
+    #     raise ValueError(f'prompt_sample {prompt_sample} not recognized')
+    # samples = gpt(prompt, n=n_generate_sample, stop=stop)
+    samples = []
+
+    for i in range(n_generate_sample):
+        idea_idx = i % len(task.ideas) if args.use_idea else 0
+        if prompt_sample == 'standard':
+            prompt = task.standard_prompt_wrap(x, y, idea_idx)
+        elif prompt_sample == 'cot':
+            prompt = task.cot_prompt_wrap(x, y)
+        else:
+            raise ValueError(f'prompt_sample {prompt_sample} not recognized')
+        samples.extend(gpt(prompt, n=1, stop=stop))
     # can add y + _ for the old tasks
     outputs = [task.standard_prompt_unwrap(y, _) for _ in samples]
     return list(filter(None, outputs))

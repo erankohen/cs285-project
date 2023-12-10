@@ -11,17 +11,17 @@ import glob
 class PieTask(Task):
     ideas = [
         '',
-        'using mathematical reasoning',
-        'using numpy vectorizations',
-        'using fancy indexing',
-        'using more efficient packages',
-        'using built-in functions',
-        'using bitwise operations',
-        'using algorithmic improvements',
-        'using list comprehensions'
+        'using mathematical reasoning where you use critical thinking and logical thinking to solve mathematical problems', # make these more verbose
+        # 'using numpy vectorizations',
+        # 'using fancy indexing',
+        # 'using more efficient packages',
+        # 'using built-in functions',
+        # 'using bitwise operations',
+        'using creative solutions where you rethink the structure of the code',
+        # 'using list comprehensions'
     ]
     
-    def __init__(self, file='../../self-refine/data/tasks/pie/codenet-python-test-1k.jsonl', run_count=3, test_count=10):
+    def __init__(self, file='../../self-refine/data/tasks/pie/codenet-python-test-1k.jsonl', run_count=4, test_count=5):
         with open(file) as f:
             data = f.readlines()
         self.data = []
@@ -55,11 +55,8 @@ class PieTask(Task):
         return [{'r': r} for r in rs]
         
     @staticmethod 
-    def standard_prompt_wrap(x: str, y:str, use_idea:bool) -> str:
-        idea = ""
-        if use_idea:
-            idea = np.random.choice(PieTask.ideas, 1)[0]
-        return standard_prompt.format(input=y if y else x, idea=idea)
+    def standard_prompt_wrap(x: str, y:str, idea_idx:int) -> str:
+        return standard_prompt.format(input=y if y else x, idea=PieTask.ideas[idea_idx])
         
     @staticmethod
     def value_prompt_wrap(x: str, y: str) -> str:

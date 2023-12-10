@@ -51,7 +51,7 @@ def run(args):
 def parse_args():
     args = argparse.ArgumentParser()
     args.add_argument('--backend', type=str, choices=['gpt-4', 'gpt-3.5-turbo'], default='gpt-4')
-    args.add_argument('--temperature', type=float, default=0.7)
+    args.add_argument('--temperature', type=float, default=1.0)
 
     args.add_argument('--task', type=str, required=True, choices=['game24', 'text', 'crosswords', 'pie'])
     args.add_argument('--task_start_index', type=int, default=900)
@@ -63,7 +63,7 @@ def parse_args():
     args.add_argument('--method_generate', type=str, choices=['sample', 'propose'])
     args.add_argument('--method_evaluate', type=str, choices=['value', 'vote', 'gt'])
     args.add_argument('--method_select', type=str, choices=['sample', 'greedy'], default='greedy')
-    args.add_argument('--n_generate_sample', type=int, default=2)  # only thing needed if naive_run
+    args.add_argument('--n_generate_sample', type=int, default=3)  # only thing needed if naive_run
     args.add_argument('--n_evaluate_sample', type=int, default=3)
     args.add_argument('--n_select_sample', type=int, default=2)
 

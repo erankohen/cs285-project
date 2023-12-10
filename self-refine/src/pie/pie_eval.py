@@ -43,7 +43,7 @@ def get_r_ttest_p(row, generated_answer_field_tag: str, input_field_tag: str = "
     generated_times = row[f"{generated_answer_field_tag}_stats"]
     input_times = row[f"{input_field_tag}_stats"]
     
-    if generated_times is None or input_times is None or len(generated_times) <= 1 or len(input_times) <= 1:
+    if generated_times is None or input_times is None or isinstance(generated_times, int) or isinstance(input_times, int) or len(generated_times) <= 1 or len(input_times) <= 1:
         return 1.0
     
     p, t = call_r_ttest_offset(slow_samples = input_times, fast_samples = generated_times, offset_frac=required_speedup)

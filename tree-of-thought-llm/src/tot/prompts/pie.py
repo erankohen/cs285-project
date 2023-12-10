@@ -1,4 +1,5 @@
 
+# try adding a role assignment to the prompt
 standard_prompt = '''
 # Slow code:
 

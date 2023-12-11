@@ -93,7 +93,7 @@ def solve(args, task, idx, to_print=True):
         if args.get_gt and not args.method_evaluate == 'gt':
             gt_values = task.get_ground_truth_values(idx, x, new_ys)
         else:
-            gt_values = ""
+            gt_values = [0] * len(new_ys)
 
         # selection
         if args.method_select == 'sample':

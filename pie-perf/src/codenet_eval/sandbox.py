@@ -66,7 +66,8 @@ def run_python_code_on_inputs(
 
     times_millisec, accs = [], []
     per_trial_times = []
-    for test_case_idx in np.random.choice(np.arange(len(ground_truths)), num_test_cases, replace=False):
+    # for test_case_idx in np.random.choice(np.arange(len(ground_truths)), num_test_cases, replace=False):
+    for test_case_idx in range(num_test_cases):
         if is_linux(): 
             cmd = (
                 f"taskset --cpu-list {cpu_number} {python_bin} {code_path}"  # taskset 00 python code.py
@@ -88,7 +89,7 @@ def run_python_code_on_inputs(
                 time_taken = time.time() - time_start
                 _per_trial_times.append(time_taken)
                 if output is None:
-                    return (np.nan, np.nan, 0)
+                    return (float('inf'), np.nan, 0, 0)
                     # timeout: since we have a generous timeout, this should not happen
 
                 if trial_idx >= ignore_first_k:
@@ -103,7 +104,7 @@ def run_python_code_on_inputs(
             except Exception as e:
                 logging.warning("Error", e)
                 # no point in repeating the test for this problem. If something went wrong, it will go wrong again
-                return (np.nan, np.nan, 0)
+                return (np.nan, np.nan, 0, 0)
 
         per_trial_times.append(_per_trial_times)
 

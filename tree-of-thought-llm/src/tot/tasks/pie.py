@@ -116,7 +116,7 @@ class PieTask(Task):
             x_time = self.runtime_cache[x]
         else:
             x_time = self.run(idx, x)
-            assert not np.isnan(x_time)
+            # assert x_time != float('inf')
 
         y_times = []
         for y in ys:
@@ -125,6 +125,8 @@ class PieTask(Task):
             else:
                 y_times.append(self.run(idx, y))
         
+        if x_time == float('inf'):
+            return - np.array(y_times)
         return list((x_time - np.array(y_times)) / x_time)
         
         
@@ -151,6 +153,7 @@ class PieTask(Task):
         with open(self.code_path, 'w+') as f:
             f.write(code)
 
+        # import pdb; pdb.set_trace()
         avg_time, std_time, avg_acc, stats = run_code_on_inputs(
             language='python',
             code_path=self.code_path,
@@ -158,9 +161,10 @@ class PieTask(Task):
             unit_test_data_basepath=problem_path,
             num_runs_per_test_case=self.run_count,
             ignore_first_k=0,
-            max_seconds_per_run=10,
+            max_seconds_per_run=20,
             cpu_number=0,
             return_if_acc_below=1.0,
+            num_test_cases=self.test_count
         )
 
         return avg_time * (float('inf') ** (not avg_acc))

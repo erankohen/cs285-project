@@ -88,8 +88,9 @@ def solve(args, task, idx, to_print=True):
             values = get_values(task, x, new_ys, args.n_evaluate_sample)
         elif args.method_evaluate == 'gt':
             values = task.get_ground_truth_values(idx, x, new_ys)
+        
         # get ground truths for evaluation
-        if args.get_gt:
+        if args.get_gt and not args.method_evaluate == 'gt':
             gt_values = task.get_ground_truth_values(idx, x, new_ys)
         else:
             gt_values = ""
@@ -97,13 +98,10 @@ def solve(args, task, idx, to_print=True):
         # selection
         if args.method_select == 'sample':
             # ps = np.array(values) / sum(values)
-            if not args.get_gt:
-                ps = softmax_stable(values)
-            else:
-                ps = softmax_stable(gt_values)
+            ps = softmax_stable(values)
             select_ids = np.random.choice(ids, size=args.n_select_sample, p=ps).tolist()
         elif args.method_select == 'greedy':
-            select_ids = sorted(ids, key=lambda x: values[x] if not args.get_gt else gt_values[x], reverse=True)[:args.n_select_sample]
+            select_ids = sorted(ids, key=lambda x: values[x], reverse=True)[:args.n_select_sample]
         select_new_ys = [new_ys[select_id] for select_id in select_ids]
 
         # log

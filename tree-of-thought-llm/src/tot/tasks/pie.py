@@ -21,7 +21,7 @@ class PieTask(Task):
         # 'using list comprehensions'
     ]
     
-    def __init__(self, file='../../self-refine/data/tasks/pie/codenet-python-test-1k.jsonl', run_count=4, test_count=5):
+    def __init__(self, file='../../self-refine/data/tasks/pie/codenet-python-test-1k.jsonl', run_count=4, test_count=1):
         with open(file) as f:
             data = f.readlines()
         self.data = []
@@ -126,7 +126,7 @@ class PieTask(Task):
                 y_times.append(self.run(idx, y))
         
         if x_time == float('inf'):
-            return - np.array(y_times)
+            return list(- np.array(y_times))
         return list((x_time - np.array(y_times)) / x_time)
         
         

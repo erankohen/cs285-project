@@ -64,7 +64,7 @@ def parse_args():
     args.add_argument('--method_evaluate', type=str, choices=['value', 'vote', 'gt'])
     args.add_argument('--method_select', type=str, choices=['sample', 'greedy'], default='greedy')
     args.add_argument('--n_generate_sample', type=int, default=3)  # only thing needed if naive_run
-    args.add_argument('--n_evaluate_sample', type=int, default=3)
+    args.add_argument('--n_evaluate_sample', type=int, default=5)
     args.add_argument('--n_select_sample', type=int, default=2)
 
     args.add_argument('--get_gt', action='store_true')
